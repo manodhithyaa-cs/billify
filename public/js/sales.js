@@ -73,7 +73,7 @@
       <input
         type="number"
         placeholder="DISCOUNT"
-        class="discount-input rounded-full border border-gray-300 px-5 py-2 w-[100px] text-sm text-black"
+        class="discount-input rounded-full border border-gray-300 px-5 py-2 w-[140px] text-sm text-black"
         min="0"
       />
       <button
