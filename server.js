@@ -59,6 +59,10 @@ app.get('/products', (req, res) => {
   res.render('layouts', { title: 'Products', currentPage: 'products' });
 })
 
+app.get('/profile', (req, res) => {
+  res.render('layouts', { title: 'Profile', currentPage: 'profile' });
+})
+
 // Socket.io connection handlers
 io.on('connection', (socket) => {
   console.log('A user connected');
