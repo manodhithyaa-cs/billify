@@ -25,8 +25,7 @@ Billify is a billing software built with **Node.js**, **Express**, **Handlebars 
 
 ```bash
 git clone https://github.com/manodhithyaa-cs/billify.git
-cd name
-
+cd billify
 
 echo "# billify" >> README.md
 git init
