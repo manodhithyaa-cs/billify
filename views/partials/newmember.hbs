@@ -1,0 +1,79 @@
+<form
+  class="bg-gray-700 rounded-xl p-10 shadow-[0_0_15px_rgba(0,0,0,0.15)] text-white w-[60vw] max-w-none mx-auto"
+  onsubmit="event.preventDefault(); alert('New Member Added!');"
+>
+  <h2 class="text-pink-600 font-bold text-3xl mb-8 select-none">Add Member</h2>
+
+  <div class="mb-6">
+    <label for="name" class="block font-semibold mb-2 text-lg select-none">Name</label>
+    <input
+      id="name"
+      name="name"
+      type="text"
+      value="Name 1"
+      class="w-full rounded-md px-5 py-4 text-gray-900 font-semibold text-lg"
+      required
+    />
+  </div>
+
+  <div class="mb-6">
+    <label for="salary" class="block font-semibold mb-2 text-lg select-none">Salary</label>
+    <input
+      id="salary"
+      name="salary"
+      type="number"
+      value="5000"
+      class="w-full rounded-md px-5 py-4 text-gray-900 font-semibold text-lg"
+      required
+      min="0"
+    />
+  </div>
+
+  <div class="mb-6">
+    <label for="email" class="block font-semibold mb-2 text-lg select-none">Email</label>
+    <input
+      id="email"
+      name="email"
+      type="email"
+      value="name1@example.com"
+      class="w-full rounded-md px-5 py-4 text-gray-900 font-semibold text-lg"
+      required
+    />
+  </div>
+
+  <div class="mb-6">
+    <label for="role" class="block font-semibold mb-2 text-lg select-none">Role</label>
+    <select
+      id="role"
+      name="role"
+      class="w-full rounded-md px-5 py-4 text-gray-900 font-semibold text-lg"
+      required
+    >
+      <option selected>Team Member</option>
+      <option>Team Lead</option>
+      <option>Manager</option>
+      <option>Intern</option>
+    </select>
+  </div>
+
+  <div class="mb-8">
+    <label for="notes" class="block font-semibold mb-2 text-lg select-none">Notes</label>
+    <textarea
+      id="notes"
+      name="notes"
+      rows="6"
+      class="w-full rounded-md px-5 py-4 text-gray-900 font-semibold text-lg resize-none"
+      placeholder="Additional notes about the member..."
+    >Reliable and punctual team member.</textarea>
+  </div>
+
+  <div class="flex justify-end">
+    <button
+      type="submit"
+      class="bg-pink-600 hover:bg-pink-700 transition-colors rounded-md px-8 py-3 font-bold text-white text-lg"
+    >
+      Add Member
+    </button>
+  </div>
+</form>
+<br /><br />

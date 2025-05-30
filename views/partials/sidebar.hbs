@@ -1,0 +1,70 @@
+<!-- Sidebar -->
+<aside
+  class="bg-[#3a3945] rounded-2xl w-full max-w-[220px] flex flex-col justify-between p-6 shadow-[0_0_20px_rgba(0,0,0,0.3)]"
+>
+  <div>
+    <h1
+      class="text-pink-600 text-3xl font-bold mb-2 select-none"
+      style="font-family: 'MedievalSharp', cursive"
+    >
+      Billify
+    </h1>
+    <hr class="border-gray-400 mb-6" />
+    <nav class="flex flex-col gap-4 text-white text-lg">
+      <a
+        href="/dashboard"
+        class="flex items-center gap-3 px-4 py-2 rounded-md font-semibold select-none {{#if (eq currentPage 'dashboard')}} bg-pink-600 {{else}} hover:text-pink-600 transition {{/if}}"
+      >
+        <i class="fas fa-th-large"></i>
+        DASHBOARD
+      </a>
+      <a
+        href="/sales"
+        class="flex items-center gap-3 px-4 py-2 rounded-md select-none {{#if (eq currentPage 'sales')}} bg-pink-600 font-semibold text-white {{else}} hover:text-pink-600 transition text-white {{/if}}"
+      >
+        <i class="fas fa-shopping-cart"></i>
+        Sales
+      </a>
+      <a
+        href="/reports"
+        class="flex items-center gap-3 px-4 py-2 rounded-md select-none {{#if (eq currentPage 'reports')}} bg-pink-600 font-semibold text-white {{else}} hover:text-pink-600 transition text-white {{/if}}"
+      >
+        <i class="fas fa-chart-bar"></i>
+        Reports
+      </a>
+      <a
+        href="/customers"
+        class="flex items-center gap-3 px-4 py-2 rounded-md select-none {{#if (eq currentPage 'customers')}} bg-pink-600 font-semibold text-white {{else}} hover:text-pink-600 transition text-white {{/if}}"
+      >
+        <i class="fas fa-users"></i>
+        Customers
+      </a>
+      <a
+        href="/appointments"
+        class="flex items-center gap-3 px-4 py-2 rounded-md select-none {{#if (eq currentPage 'appointments')}} bg-pink-600 font-semibold text-white {{else}} hover:text-pink-600 transition text-white {{/if}}"
+      >
+        <i class="fas fa-calendar-alt"></i>
+        Appointments
+      </a>
+      <a
+        href="/products"
+        class="flex items-center gap-3 px-4 py-2 rounded-md select-none {{#if (eq currentPage 'products')}} bg-pink-600 font-semibold text-white {{else}} hover:text-pink-600 transition text-white {{/if}}"
+      >
+        <i class="fas fa-shopping-cart"></i>
+        Products
+      </a>
+      <a
+        href="/team"
+        class="flex items-center gap-3 px-4 py-2 rounded-md select-none {{#if (eq currentPage 'team')}} bg-pink-600 font-semibold text-white {{else}} hover:text-pink-600 transition text-white {{/if}}"
+      >
+        <i class="fas fa-network-wired"></i>
+        Team
+      </a>
+    </nav>
+  </div>
+  <button
+    class="mt-6 bg-pink-600 text-white font-semibold rounded-md px-4 py-2 flex items-center gap-2 select-none"
+  >
+    <i class="fas fa-sign-out-alt"></i> LOGOUT
+  </button>
+</aside>

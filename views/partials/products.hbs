@@ -1,0 +1,40 @@
+<!-- Product Management Section -->
+<div class="mt-10">
+  {{!-- <h2 class="text-white text-xl font-bold mb-4">Product Management</h2> --}}
+
+  <!-- Add/Edit Form -->
+  <form id="product-form" class="bg-white text-black p-6 rounded-xl shadow-[0_0_20px_#EB3170] max-w-xl mb-6">
+    <input type="hidden" id="product-id" />
+    <div class="mb-4">
+      <label class="block font-semibold mb-2">Product Name</label>
+      <input type="text" id="product-name" required
+        class="w-full border border-[#EB3170] rounded-full px-6 py-3 text-sm shadow-[0_0_8px_#EB3170] focus:outline-none" />
+    </div>
+    <div class="mb-4">
+      <label class="block font-semibold mb-2">Price (₹)</label>
+      <input type="number" id="product-price" required
+        class="w-full border border-[#EB3170] rounded-full px-6 py-3 text-sm shadow-[0_0_8px_#EB3170] focus:outline-none" />
+    </div>
+    <button type="submit"
+      class="bg-[#EB3170] hover:bg-pink-700 text-white px-6 py-2 rounded-full font-semibold">Save Product</button>
+  </form>
+
+  <!-- Products Table -->
+  <div class="rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.3)] border border-white overflow-hidden">
+    <table class="w-full border-collapse text-white text-xs bg-[#3A393F]">
+      <thead>
+        <tr class="border-b border-white">
+          <th class="px-4 py-3 text-left font-bold select-none">#</th>
+          <th class="px-4 py-3 text-left font-bold select-none">PRODUCT NAME</th>
+          <th class="px-4 py-3 text-left font-bold select-none">PRICE</th>
+          <th class="px-4 py-3 text-left font-bold select-none">ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody id="product-table-body">
+        <!-- Dynamic rows will appear here -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script src="/js/products.js"></script>

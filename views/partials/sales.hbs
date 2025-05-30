@@ -1,0 +1,78 @@
+<section class="flex flex-col md:flex-row gap-6 min-h-[400px]">
+  <!-- Sales Form -->
+  <form
+    class="flex flex-col gap-4"
+    style="flex-basis: 50%; max-width: 50%;"
+    onsubmit="return false"
+    id="sales-form"
+  >
+    <div id="services-container" class="flex flex-col gap-4"></div>
+
+    <div class="flex justify-end">
+      <button
+        class="bg-pink-600 text-white rounded-md px-6 py-2 text-sm font-semibold hover:bg-pink-700 transition-colors"
+        type="button"
+        id="add-service"
+      >
+        ADD
+      </button>
+    </div>
+  </form>
+
+  <!-- Summary -->
+  <aside
+    class="bg-white rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.15)] p-6 flex flex-col gap-6"
+    style="flex-basis: 50%; max-width: 50%;"
+  >
+    <input
+      type="text"
+      placeholder="CUSTOMER PHONE NUMBER"
+      class="border border-gray-300 rounded-full px-6 py-2 text-xs text-black placeholder:text-black placeholder:text-opacity-60 focus:outline-none focus:ring-2 focus:ring-pink-600"
+    />
+
+    <h3
+      class="text-pink-600 text-2xl font-bold select-none"
+      style="font-family: 'MedievalSharp', cursive"
+    >
+      SALES
+    </h3>
+
+    <!-- Dynamic Summary -->
+    <div id="summary" class="text-sm text-gray-700 flex flex-col gap-2 overflow-y-auto max-h-[60vh]">
+      <!-- Service items will be added here dynamically -->
+    </div>
+
+    <!-- Global Discount -->
+    <input
+      type="number"
+      id="global-discount"
+      placeholder="GLOBAL DISCOUNT"
+      min="0"
+      class="border border-gray-300 rounded-full px-5 py-2 text-sm text-black placeholder:text-black placeholder:text-opacity-60 focus:outline-none focus:ring-2 focus:ring-pink-600"
+    />
+
+    <!-- Payment Method -->
+    <select
+      id="payment-method"
+      class="border border-gray-300 rounded-full px-5 py-2 text-sm text-black focus:outline-none focus:ring-2 focus:ring-pink-600"
+    >
+      <option value="UPI">UPI</option>
+      <option value="Cash">Cash</option>
+      <option value="Card">Card</option>
+    </select>
+
+    <!-- Final Total -->
+    <div class="text-right text-base font-semibold">
+      Total: ₹<span id="final-total">0</span>
+    </div>
+
+    <button
+      class="bg-pink-600 text-white rounded-md py-2 text-sm font-semibold hover:bg-pink-700 transition-colors"
+      type="button"
+    >
+      PAY
+    </button>
+  </aside>
+</section>
+
+<script src="/js/sales.js"></script>
