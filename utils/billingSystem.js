@@ -1,18 +1,23 @@
 const db = require("./db.js");
 
 // Login Details
-function createLogin(data, callback) {
+const { hashPassword } = require('./encryption');
+
+async function createLogin(data, callback) {
+  const hashedPassword = await hashPassword(data.password);
+
   const sql = `
     INSERT INTO login_details 
     (firstname, lastname, business_name, business_location, email, password) 
     VALUES (?, ?, ?, ?, ?, ?)`;
+
   db.query(sql, [
     data.firstname,
     data.lastname,
     data.business_name,
     data.business_location,
     data.email,
-    data.password
+    hashedPassword
   ], callback);
 }
 

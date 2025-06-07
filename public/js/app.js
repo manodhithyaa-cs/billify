@@ -25,3 +25,23 @@ signupBtn.addEventListener('click', () => {
   loginBtn.classList.add('bg-white', 'text-black');
   loginBtn.classList.remove('bg-[#e72e6c]', 'text-white');
 });
+
+const socket = io();
+
+const loginSocketForm = document.getElementById('login-form');
+loginSocketForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const email = loginSocketForm.querySelector('input[name="email"]').value;
+  const password = loginSocketForm.querySelector('input[name="password"]').value;
+
+  socket.emit('login', { email, password });
+});
+
+socket.on('loginResponse', (data) => {
+  if (data.success) {
+    window.location.href = '/dashboard'; // Redirect if login succeeds
+  } else {
+    alert(data.message); // Show error if login fails
+  }
+});

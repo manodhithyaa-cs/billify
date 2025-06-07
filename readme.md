@@ -23,6 +23,7 @@ Billify is a billing software built with **Node.js**, **Express**, **Handlebars 
 - **npm install express mysql cors body-parser hbs dotenv socket.io**
 - **npm install -D nodemon**
 - **npm install jsonwebtoken**
+- **npm install bcrypt express-session**
 
 1. Clone the repository:
 
