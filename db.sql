@@ -1,5 +1,9 @@
 .-- Billing System Database Schema
 
+create Database BillingSystem;
+
+use BillingSystem;
+
 -- 1. Login Details
 CREATE TABLE login_details (
     id INT AUTO_INCREMENT PRIMARY KEY,
