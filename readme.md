@@ -41,9 +41,9 @@ git remote add origin https://github.com/manodhithyaa-cs/billify.git
 git branch -M main
 git push -u origin main
 
-- ----------------------------------
+----------------------------------
 
-- git pull origin main
-- git add .
-- git commit -m "Initial commit"
-- git push -u origin main
+git pull origin main
+git add .
+git commit -m "Initial commit"
+git push -u origin main
