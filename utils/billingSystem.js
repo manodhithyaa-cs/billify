@@ -63,3 +63,12 @@ module.exports = {
   addPurchaseItem,
   getItemsByPurchase,
 };
+
+/*
+const billing = require("./models/billingSystem");
+
+billing.getAllVendors((err, vendors) => {
+  if (err) console.error(err);
+  else console.log(vendors);
+});
+*/
