@@ -1,4 +1,4 @@
-.-- Billing System Database Schema
+-- Billing System Database Schema
 
 create Database BillingSystem;
 
@@ -57,3 +57,30 @@ CREATE TABLE purchase_items (
     item_name VARCHAR(100),
     FOREIGN KEY (purchase_id) REFERENCES purchases(purchase_id)
 );
+
+INSERT INTO vendors (vendor_name, gst_number, phone_number, address)
+VALUES 
+('Beauty Supplies Inc.', '29AAACB1234C1Z', '9876543210', '123 MG Road, Mumbai'),
+('Salon Essentials', '19AACCE2345D2Y', '9123456789', '22 Park Street, Delhi');
+
+INSERT INTO customers (customer_name, location, salon_owner, phone, gst_number)
+VALUES 
+('Priya Kumar', 'Chennai', 'Alice Johnson', '9876000001', '33AAGCP1234F1Z'),
+('Rahul Mehta', 'Bangalore', 'Bob Smith', '9876000002', '29BBBCM4567H2X');
+
+INSERT INTO login_details (firstname, lastname, business_name, business_location, email, password)
+VALUES 
+('Alice', 'Johnson', 'Glow Salon', 'Chennai', 'alice@example.com', 'hashed_password1'),
+('Bob', 'Smith', 'Style Hub', 'Bangalore', 'bob@example.com', 'hashed_password2');
+
+INSERT INTO purchases (purchase_date, vendor_id, purchase_amount, remarks)
+VALUES 
+('2025-06-01', 1, 5000.00, 'Monthly restock'),
+('2025-06-05', 2, 7500.50, 'Bulk discount order');
+
+INSERT INTO purchase_items (purchase_id, item_name)
+VALUES 
+(1, 'Shampoo Bottles'),
+(1, 'Hair Serums'),
+(2, 'Face Creams'),
+(2, 'Hair Dryers');
