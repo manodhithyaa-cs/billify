@@ -68,36 +68,60 @@ app.get('/dashboard', authenticate, (req, res) => {
 });
 
 app.get('/sales', authenticate, (req, res) => {
+  console.log(req.user);
   res.render('layouts', { title: 'Sales', currentPage: 'sales', user: req.user });
 });
 
 app.get('/reports', authenticate, (req, res) => {
+  console.log(req.user);
   res.render('layouts', { title: 'Reports', currentPage: 'reports', user: req.user });
 });
 
 app.get('/customers', authenticate, (req, res) => {
+  console.log(req.user);
   res.render('layouts', { title: 'Customers', currentPage: 'customers', user: req.user });
 });
 
 app.get('/appointments', authenticate, (req, res) => {
+  console.log(req.user);
   res.render('layouts', { title: 'Appointments', currentPage: 'appointments', user: req.user });
 });
 
 app.get('/team', authenticate, (req, res) => {
+  console.log(req.user);
   res.render('layouts', { title: 'Team', currentPage: 'team', user: req.user });
 });
 
 app.get('/team/newmember', authenticate, (req, res) => {
+  console.log(req.user);
   res.render('layouts', { title: 'New Member', currentPage: 'team_new', user: req.user });
 });
 
 app.get('/products', authenticate, (req, res) => {
+  console.log(req.user);
   res.render('layouts', { title: 'Products', currentPage: 'products', user: req.user });
 });
 
 app.get('/profile', authenticate, (req, res) => {
-  res.render('layouts', { title: 'Profile', currentPage: 'profile' });
+  console.log(req.user);
+
+  billing.getAllLogins((err, users) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("Server error");
+    }
+
+    const user_data = users.find(u => u.id === req.user.id);
+
+    res.render('layouts', {
+      title: 'Profile',
+      currentPage: 'profile',
+      user: req.user,
+      data: user_data
+    });
+  });
 });
+
 
 app.get('/logout', (req, res) => {
   res.clearCookie('token');

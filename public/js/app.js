@@ -2,33 +2,35 @@ const loginBtn = document.getElementById('btn-login');
 const signupBtn = document.getElementById('btn-signup');
 const loginForm = document.getElementById('login-form');
 const signupForm = document.getElementById('signup-form');
-const formContainer = document.querySelector('div[style*="min-width"]');
-
-loginBtn.addEventListener('click', () => {
-  loginForm.classList.remove('hidden');
-  signupForm.classList.add('hidden');
-  formContainer.style.minWidth = '400px';
-
-  loginBtn.classList.add('bg-[#e72e6c]', 'text-white');
-  loginBtn.classList.remove('bg-white', 'text-black');
-  signupBtn.classList.add('bg-white', 'text-black');
-  signupBtn.classList.remove('bg-[#e72e6c]', 'text-white');
-});
-
-signupBtn.addEventListener('click', () => {
-  signupForm.classList.remove('hidden');
-  loginForm.classList.add('hidden');
-  formContainer.style.minWidth = '600px';
-
-  signupBtn.classList.add('bg-[#e72e6c]', 'text-white');
-  signupBtn.classList.remove('bg-white', 'text-black');
-  loginBtn.classList.add('bg-white', 'text-black');
-  loginBtn.classList.remove('bg-[#e72e6c]', 'text-white');
-});
 
 const socket = io();
 
-// Login
+// Toggle forms and active button styling
+function showLogin() {
+  loginForm.classList.remove('hidden');
+  signupForm.classList.add('hidden');
+  loginBtn.classList.add('bg-[#e72e6c]', 'text-white');
+  loginBtn.classList.remove('bg-white', 'text-black');
+  signupBtn.classList.remove('bg-[#e72e6c]', 'text-white');
+  signupBtn.classList.add('bg-white', 'text-black');
+}
+
+function showSignup() {
+  signupForm.classList.remove('hidden');
+  loginForm.classList.add('hidden');
+  signupBtn.classList.add('bg-[#e72e6c]', 'text-white');
+  signupBtn.classList.remove('bg-white', 'text-black');
+  loginBtn.classList.remove('bg-[#e72e6c]', 'text-white');
+  loginBtn.classList.add('bg-white', 'text-black');
+}
+
+// Initial state: show login form
+showLogin();
+
+loginBtn.addEventListener('click', showLogin);
+signupBtn.addEventListener('click', showSignup);
+
+// Login form submit
 loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
@@ -38,6 +40,7 @@ loginForm.addEventListener('submit', (e) => {
   socket.emit('login', { email, password });
 });
 
+// Listen for login response
 socket.on('loginResponse', (data) => {
   if (data.success) {
     window.location.href = '/dashboard';
@@ -46,7 +49,7 @@ socket.on('loginResponse', (data) => {
   }
 });
 
-// Signup
+// Signup form submit
 signupForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
@@ -62,6 +65,7 @@ signupForm.addEventListener('submit', (e) => {
   socket.emit('signup', data);
 });
 
+// Listen for signup response
 socket.on('signupResponse', (data) => {
   if (data.success) {
     window.location.href = '/dashboard';
@@ -69,3 +73,13 @@ socket.on('signupResponse', (data) => {
     alert(data.message);
   }
 });
+
+// Show alert if error query param is present in URL
+const params = new URLSearchParams(window.location.search);
+const error = params.get("error");
+
+if (error) {
+  alert(decodeURIComponent(error));
+  // Optional: remove error param without reload or redirect to clean URL
+  // window.history.replaceState({}, document.title, window.location.pathname);
+}
