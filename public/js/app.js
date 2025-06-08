@@ -28,20 +28,44 @@ signupBtn.addEventListener('click', () => {
 
 const socket = io();
 
-const loginSocketForm = document.getElementById('login-form');
-loginSocketForm.addEventListener('submit', (e) => {
+// Login
+loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const email = loginSocketForm.querySelector('input[name="email"]').value;
-  const password = loginSocketForm.querySelector('input[name="password"]').value;
+  const email = loginForm.querySelector('input[name="email"]').value;
+  const password = loginForm.querySelector('input[name="password"]').value;
 
   socket.emit('login', { email, password });
 });
 
 socket.on('loginResponse', (data) => {
   if (data.success) {
-    window.location.href = '/dashboard'; // Redirect if login succeeds
+    window.location.href = '/dashboard';
   } else {
-    alert(data.message); // Show error if login fails
+    alert(data.message);
+  }
+});
+
+// Signup
+signupForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const data = {
+    firstname: signupForm.querySelector('input[name="firstname"]').value,
+    lastname: signupForm.querySelector('input[name="lastname"]').value,
+    business_name: signupForm.querySelector('input[name="business_name"]').value,
+    business_location: signupForm.querySelector('input[name="business_location"]').value,
+    email: signupForm.querySelector('input[name="email"]').value,
+    password: signupForm.querySelector('input[name="password"]').value
+  };
+
+  socket.emit('signup', data);
+});
+
+socket.on('signupResponse', (data) => {
+  if (data.success) {
+    window.location.href = '/dashboard';
+  } else {
+    alert(data.message);
   }
 });

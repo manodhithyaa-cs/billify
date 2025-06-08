@@ -1,140 +1,61 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ title }}</title>
-    <link href="/css/app.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body class="bg-white flex items-center justify-center min-h-screen p-4">
-    <div
-      class="bg-[#3a3942] rounded-2xl shadow-lg p-8 w-full max-w-xs"
-      style="min-width: 400px"
-    >
-      <h1
-        class="font-billify text-[#e72e6c] irish-grover-regular text-3xl text-center mb-6 select-none"
-      >
-        Billify
-      </h1>
+    <div class="bg-[#3a3942] rounded-2xl shadow-lg p-8 w-full max-w-lg" style="min-width: 400px">
+      <h1 class="text-[#e72e6c] text-3xl text-center mb-6 font-bold">Billify</h1>
 
-      <!-- Toggle Buttons -->
       <div id="toggle-buttons" class="flex mb-5 border border-[#e72e6c] rounded-md overflow-hidden">
-        <button
-          id="btn-login"
-          class="flex-1 bg-[#e72e6c] text-white font-bold py-2 text-sm select-none"
-          type="button"
-        >
-          LOGIN
-        </button>
-        <button
-          id="btn-signup"
-          class="flex-1 bg-white text-black font-bold py-2 text-sm select-none"
-          type="button"
-        >
-          SIGNUP
-        </button>
+        <button id="btn-login" class="flex-1 bg-[#e72e6c] text-white font-bold py-2 text-sm" type="button">LOGIN</button>
+        <button id="btn-signup" class="flex-1 bg-white text-black font-bold py-2 text-sm" type="button">SIGNUP</button>
       </div>
 
-      <!-- Forms -->
       <div id="form-container">
         <!-- Login Form -->
-        <form id="login-form">
-          <input
-            type="email"
-            placeholder="E-MAIL ID"
-            class="w-full mb-4 py-2 px-4 rounded-full text-black text-sm placeholder-black/70 focus:outline-none"
-          />
-          <input
-            type="password"
-            placeholder="PASSWORD"
-            class="w-full mb-4 py-2 px-4 rounded-full text-black text-sm placeholder-black/70 focus:outline-none"
-          />
-          <div class="flex items-center mb-2 select-none">
-            <input
-              id="remember"
-              type="checkbox"
-              class="w-5 h-5 mr-2 cursor-pointer"
-            />
-            <label
-              for="remember"
-              class="text-[#e72e6c] text-xs font-semibold cursor-pointer"
-            >
-              REMEMBER ME
-            </label>
-          </div>
-          {{!-- <p class="text-[#e72e6c] text-xs mb-6 select-none">
-            Didn’t Create One?
-            <a style="color: white;" class="font-bold" href="#"> Sign Up</a>
-          </p> --}}
-          <button
-            class="w-full bg-[#e72e6c] text-white font-bold py-2 rounded-full text-sm select-none"
-            type="submit"
-          >
-            LOGIN
-          </button>
+        <form id="login-form" action="/login" method="POST">
+          <input name="email" type="email" placeholder="E-MAIL ID" required class="w-full mb-4 py-2 px-4 rounded-full text-black text-sm" />
+          <input name="password" type="password" placeholder="PASSWORD" required class="w-full mb-4 py-2 px-4 rounded-full text-black text-sm" />
+          <button type="submit" class="w-full bg-[#e72e6c] text-white font-bold py-2 rounded-full text-sm">LOGIN</button>
         </form>
 
         <!-- Signup Form -->
-        <form id="signup-form" class="hidden">
-          <div class="flex gap-x-2 mb-3">
-            <input
-              type="text"
-              placeholder="FIRST NAME"
-              class="w-1/2 py-2 px-4 rounded-full text-black text-sm placeholder-black/70 focus:outline-none"
-            />
-            <input
-              type="text"
-              placeholder="LAST NAME"
-              class="w-1/2 py-2 px-4 rounded-full text-black text-sm placeholder-black/70 focus:outline-none"
-            />
+        <form id="signup-form" class="hidden" action="/signup" method="POST">
+          <div class="flex gap-2 mb-3">
+            <input name="firstname" type="text" placeholder="FIRST NAME" required class="w-1/2 py-2 px-4 rounded-full text-black text-sm" />
+            <input name="lastname" type="text" placeholder="LAST NAME" required class="w-1/2 py-2 px-4 rounded-full text-black text-sm" />
           </div>
-          <div class="flex gap-x-2 mb-3">
-            <input
-              type="text"
-              placeholder="BUSINESS NAME"
-              class="w-full mb-3 py-2 px-4 rounded-full text-black text-sm placeholder-black/70 focus:outline-none"
-            />
-            <input
-              type="text"
-              placeholder="BUSINESS LOCATION"
-              class="w-full mb-3 py-2 px-4 rounded-full text-black text-sm placeholder-black/70 focus:outline-none"
-            />
+          <div class="flex gap-2 mb-3">
+            <input name="business_name" type="text" placeholder="BUSINESS NAME" required class="w-1/2 py-2 px-4 rounded-full text-black text-sm" />
+            <input name="business_location" type="text" placeholder="BUSINESS LOCATION" required class="w-1/2 py-2 px-4 rounded-full text-black text-sm" />
           </div>
-          <div class="flex gap-x-2 mb-3">
-            <input
-              type="email"
-              placeholder="E-MAIL ID"
-              class="w-full mb-3 py-2 px-4 rounded-full text-black text-sm placeholder-black/70 focus:outline-none"
-            />
-            <input
-              type="password"
-              placeholder="CREATE PASSWORD"
-              class="w-full mb-4 py-2 px-4 rounded-full text-black text-sm placeholder-black/70 focus:outline-none"
-            />
-          </div>
-          {{!-- <p class="text-[#e72e6c] text-xs mb-6 select-none">
-            Already have an account?
-            <a style="color: white;" class="font-bold" href="#"> Login</a>
-          </p> --}}
-          <button
-            class="w-full bg-[#e72e6c] text-white font-bold py-2 rounded-full text-sm select-none"
-            type="submit"
-          >
-            SIGN UP
-          </button>
+          <input name="email" type="email" placeholder="E-MAIL ID" required class="w-full mb-3 py-2 px-4 rounded-full text-black text-sm" />
+          <input name="password" type="password" placeholder="CREATE PASSWORD" required class="w-full mb-4 py-2 px-4 rounded-full text-black text-sm" />
+          <button type="submit" class="w-full bg-[#e72e6c] text-white font-bold py-2 rounded-full text-sm">SIGN UP</button>
         </form>
       </div>
     </div>
+
+    <script>
+      const loginBtn = document.getElementById('btn-login');
+      const signupBtn = document.getElementById('btn-signup');
+      const loginForm = document.getElementById('login-form');
+      const signupForm = document.getElementById('signup-form');
+
+      loginBtn.addEventListener('click', () => {
+        loginForm.classList.remove('hidden');
+        signupForm.classList.add('hidden');
+      });
+
+      signupBtn.addEventListener('click', () => {
+        signupForm.classList.remove('hidden');
+        loginForm.classList.add('hidden');
+      });
+    </script>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/app.js"></script>
