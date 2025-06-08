@@ -68,10 +68,10 @@ VALUES
 ('Priya Kumar', 'Chennai', 'Alice Johnson', '9876000001', '33AAGCP1234F1Z'),
 ('Rahul Mehta', 'Bangalore', 'Bob Smith', '9876000002', '29BBBCM4567H2X');
 
-INSERT INTO login_details (firstname, lastname, business_name, business_location, email, password)
-VALUES 
-('Alice', 'Johnson', 'Glow Salon', 'Chennai', 'alice@example.com', 'hashed_password1'),
-('Bob', 'Smith', 'Style Hub', 'Bangalore', 'bob@example.com', 'hashed_password2');
+-- INSERT INTO login_details (firstname, lastname, business_name, business_location, email, password)
+-- VALUES 
+-- ('Alice', 'Johnson', 'Glow Salon', 'Chennai', 'alice@example.com', 'hashed_password1'),
+-- ('Bob', 'Smith', 'Style Hub', 'Bangalore', 'bob@example.com', 'hashed_password2');
 
 INSERT INTO purchases (purchase_date, vendor_id, purchase_amount, remarks)
 VALUES 
