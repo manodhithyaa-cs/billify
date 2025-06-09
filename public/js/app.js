@@ -37,7 +37,7 @@ loginForm.addEventListener('submit', (e) => {
   const email = loginForm.querySelector('input[name="email"]').value;
   const password = loginForm.querySelector('input[name="password"]').value;
 
-  socket.emit('login', { email, password });
+  // socket.emit('login', { email, password });
 });
 
 // Listen for login response
@@ -62,7 +62,7 @@ signupForm.addEventListener('submit', (e) => {
     password: signupForm.querySelector('input[name="password"]').value
   };
 
-  socket.emit('signup', data);
+  // socket.emit('signup', data);
 });
 
 // Listen for signup response

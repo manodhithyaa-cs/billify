@@ -50,3 +50,10 @@ git pull origin main
 git add .
 git commit -m "Initial commit"
 git push -u origin main
+- ----------------------------------
+- git pull origin main
+- git add .
+- git commit -m "Initial commit"
+- git push -u origin main
+
+- hello monkey me found this 
