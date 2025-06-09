@@ -1,5 +1,5 @@
 require("dotenv").config();
-const mysql = require('mysql2'); // change here
+const mysql = require('mysql2');
 
 const conn = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -15,14 +15,3 @@ conn.connect((err) => {
 });
 
 module.exports = conn;
-
-/*
-
-const db = require("./db");
-
-db.query("SELECT * FROM users", (err, results) => {
-  if (err) throw err;
-  console.log(results);
-});
-
-*/

@@ -12,7 +12,9 @@ CREATE TABLE login_details (
     business_name VARCHAR(100),
     business_location VARCHAR(100),
     email VARCHAR(100) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(20) NOT NULL DEFAULT "Owner",
+    status int NOT NULL DEFAULT 0
 );
 
 -- 2. Vendor Details
@@ -57,6 +59,15 @@ CREATE TABLE purchase_items (
     item_name VARCHAR(100),
     FOREIGN KEY (purchase_id) REFERENCES purchases(purchase_id)
 );
+
+-- 6. Login verification
+CREATE TABLE verification_tokens (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(255) NOT NULL,
+  token VARCHAR(255) NOT NULL,
+  expires_at DATETIME NOT NULL
+);
+
 
 INSERT INTO vendors (vendor_name, gst_number, phone_number, address)
 VALUES 

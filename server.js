@@ -9,12 +9,11 @@ require('dotenv').config();
 
 const db = require('./utils/db');
 const billing = require('./utils/billingSystem');
-const { generateToken, comparePassword, hashPassword } = require('./utils/encryption');
+const { generateToken, comparePassword } = require('./utils/encryption');
 const { authenticate } = require('./utils/auth');
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
 const port = 3000 || process.env.PORT;
 
 // Middleware
@@ -34,85 +33,74 @@ app.get('/', (req, res) => {
   res.render('index', { title: 'Login Page' });
 });
 
+// Signup route (directly active)
 app.post('/signup', async (req, res) => {
-  const data = req.body;
   try {
-    billing.createLogin(data, async (err) => {
-      if (err) return res.status(500).send('Signup failed');
-      res.redirect('/');
-    });
-  } catch {
-    res.status(500).send('Signup failed');
+    const data = req.body;
+    data.status = 1; // directly activate account
+    console.log(`signup data: ${data.email}, ${data.password}`);
+    await billing.createLogin(data);
+    res.redirect('/');
+  } catch (error) {
+    console.error("Signup error:", error);
+    res.status(500).send('Signup failed. Please try again.');
   }
 });
 
-app.post('/login', (req, res) => {
+// Login route
+app.post('/login', async (req, res) => {
   const { email, password } = req.body;
-  db.query("SELECT * FROM login_details WHERE email = ?", [email], async (err, results) => {
-    if (err || results.length === 0) return res.redirect('/?error=Invalid credentials');
+
+  try {
+    const results = await new Promise((resolve, reject) => {
+      db.query("SELECT * FROM login_details WHERE email = ?", [email], (err, results) => {
+        if (err) reject(err);
+        else resolve(results);
+      });
+    });
+
+    if (!results || results.length === 0) {
+      console.log(`Login failed: no user with email ${email}`);
+      return res.redirect('/?error=Invalid credentials');
+    }
 
     const user = results[0];
-    const valid = await comparePassword(password, user.password);
+    console.log("Password entered:", password);
+    console.log("Stored hash:", user.password);
 
-    if (!valid) return res.redirect('/?error=Invalid credentials');
+    const valid = await comparePassword(password, user.password);
+    console.log("Password valid:", valid);
+
+    if (!valid) {
+      return res.redirect('/?error=Invalid credentials');
+    }
 
     const token = generateToken({ id: user.id, email: user.email });
     res.cookie('token', token, { httpOnly: true, maxAge: 3600000 });
     res.redirect('/dashboard');
+  } catch (error) {
+    console.error("Login error:", error);
+    res.redirect('/?error=Something went wrong');
+  }
+});
+
+// Protected pages
+const pages = ['dashboard', 'sales', 'reports', 'customers', 'appointments', 'team', 'products'];
+pages.forEach(page => {
+  app.get(`/${page}`, authenticate, (req, res) => {
+    res.render('layouts', { title: page[0].toUpperCase() + page.slice(1), currentPage: page, user: req.user });
   });
 });
 
-app.get('/dashboard', authenticate, (req, res) => {
-  console.log(req.user);
-  res.render('layouts', { title: 'Dashboard', currentPage: 'dashboard', user: req.user });
-});
-
-app.get('/sales', authenticate, (req, res) => {
-  console.log(req.user);
-  res.render('layouts', { title: 'Sales', currentPage: 'sales', user: req.user });
-});
-
-app.get('/reports', authenticate, (req, res) => {
-  console.log(req.user);
-  res.render('layouts', { title: 'Reports', currentPage: 'reports', user: req.user });
-});
-
-app.get('/customers', authenticate, (req, res) => {
-  console.log(req.user);
-  res.render('layouts', { title: 'Customers', currentPage: 'customers', user: req.user });
-});
-
-app.get('/appointments', authenticate, (req, res) => {
-  console.log(req.user);
-  res.render('layouts', { title: 'Appointments', currentPage: 'appointments', user: req.user });
-});
-
-app.get('/team', authenticate, (req, res) => {
-  console.log(req.user);
-  res.render('layouts', { title: 'Team', currentPage: 'team', user: req.user });
-});
-
 app.get('/team/newmember', authenticate, (req, res) => {
-  console.log(req.user);
   res.render('layouts', { title: 'New Member', currentPage: 'team_new', user: req.user });
 });
 
-app.get('/products', authenticate, (req, res) => {
-  console.log(req.user);
-  res.render('layouts', { title: 'Products', currentPage: 'products', user: req.user });
-});
-
 app.get('/profile', authenticate, (req, res) => {
-  console.log(req.user);
-
   billing.getAllLogins((err, users) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("Server error");
-    }
+    if (err) return res.status(500).send("Server error");
 
     const user_data = users.find(u => u.id === req.user.id);
-
     res.render('layouts', {
       title: 'Profile',
       currentPage: 'profile',
@@ -122,13 +110,12 @@ app.get('/profile', authenticate, (req, res) => {
   });
 });
 
-
 app.get('/logout', (req, res) => {
   res.clearCookie('token');
   res.redirect('/');
 });
 
-// Start
+// Start server
 server.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
